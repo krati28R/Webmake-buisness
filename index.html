@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WebMaker | Websites for your business</title>
+  <meta name="description" content="WebMaker designs, builds and hosts clear, fast websites for local businesses.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e4a5a'/%3E%3Cpath d='M11 20 L21.5 46 L32 27 L42.5 46 L53 20' fill='none' stroke='%23f2a93b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Keeps content visible if JavaScript fails -->
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <a href="#home" class="logo">
+      <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#0e4a5a"/>
+        <path d="M11 20 L21.5 46 L32 27 L42.5 46 L53 20" fill="none" stroke="#f2a93b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>WebMaker</span>
+    </a>
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">Menu</button>
+    <nav class="links" id="links">
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <button type="button" class="link-btn" id="signin-btn">Sign in</button>
+      <a href="#contact" class="btn small">Get a quote</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <h1>
+        <span class="line"><span>We build websites for your business.</span></span>
+      </h1>
+      <p class="hero-sub">Clear, fast websites for local businesses, built around what your customers need.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn">Start your project</a>
+        <a href="#services" class="btn ghost">See what we do</a>
+      </div>
+    </section>
+
+    <!-- WHAT WE DO: three boxes side by side -->
+    <section class="section" id="services">
+      <h2 class="reveal">What we do</h2>
+      <div class="cards">
+        <article class="card reveal">
+          <span class="num">1</span>
+          <h3>Website making</h3>
+          <p>A custom website built for your business. It works on phones, uses your colors and shows your content.</p>
+        </article>
+        <article class="card reveal">
+          <span class="num">2</span>
+          <h3>Graphic design</h3>
+          <p>Logo, banners and social media graphics that match your brand.</p>
+        </article>
+        <article class="card reveal">
+          <span class="num">3</span>
+          <h3>Deployment and maintenance</h3>
+          <p>We put your website live on the internet with HTTPS, and keep it updated when your details change.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CALL / EMAIL PROMISE -->
+    <section class="section band" id="about">
+      <div class="about">
+        <div class="reveal">
+          <h2>One call or one email, and we respond</h2>
+          <p>Tell us what you need and we will get back to you. We listen to your requirements first, then give you the best service we can. You always talk directly to the people doing the work.</p>
+        </div>
+        <ul class="promises reveal">
+          <li><strong>Call us</strong><span>We pick up and answer your questions.</span></li>
+          <li><strong>Email us</strong><span>We reply to every message.</span></li>
+          <li><strong>Best service</strong><span>We do the work properly and support you after it is done.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- REVIEWS (no fake reviews: add real ones later) -->
+    <section class="section" id="reviews">
+      <h2 class="reveal">Reviews</h2>
+      <p class="reveal muted">Reviews from our clients will appear here. Worked with us? Send us yours using the form below.</p>
+    </section>
+
+    <!-- BUSINESS DETAILS FORM -->
+    <section class="section band" id="contact">
+      <h2 class="reveal">Tell us about your business</h2>
+      <form id="contact-form" class="form reveal">
+        <!-- STEP: get your free key at web3forms.com and paste it in value="" below -->
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+        <input type="hidden" name="subject" value="New business enquiry from your website">
+        <input type="checkbox" name="botcheck" class="trap" tabindex="-1" autocomplete="off">
+
+        <div class="row">
+          <label>Your name *
+            <input type="text" name="name" required autocomplete="name">
+          </label>
+          <label>Business name *
+            <input type="text" name="business_name" required autocomplete="organization">
+          </label>
+        </div>
+
+        <div class="row">
+          <label>Phone number *
+            <input type="tel" name="phone" required pattern="[0-9+\s\-]{7,18}" title="Enter a valid phone number" autocomplete="tel">
+          </label>
+          <label>Email *
+            <input type="email" name="email" required autocomplete="email">
+          </label>
+        </div>
+
+        <label>Photo of your business and logo (paste a link)
+          <input type="url" name="photo_link" placeholder="Google Drive, Instagram or Facebook link">
+        </label>
+
+        <label>About your business *
+          <textarea name="about_business" rows="3" required placeholder="What do you do, who are your customers, where are you located?"></textarea>
+        </label>
+
+        <label>What do you need in the website?
+          <textarea name="website_requirements" rows="4" placeholder="Pages, colors, features, websites you like, deadline, anything specific."></textarea>
+        </label>
+
+        <fieldset class="choice">
+          <legend>Do you need maintenance after the website is live? *</legend>
+          <label><input type="radio" name="maintenance" value="Yes" required> Yes</label>
+          <label><input type="radio" name="maintenance" value="No"> No</label>
+        </fieldset>
+
+        <button type="submit" class="btn">Send details</button>
+        <p id="form-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 WebMaker</p>
+    <!-- Replace with the REAL email and phone number -->
+    <p>hello@webmaker.example &middot; +91 00000 00000</p>
+  </footer>
+
+  <!-- SIGN IN popup (placeholder until a real login is built) -->
+  <dialog id="signin-dialog">
+    <h3>Client sign in</h3>
+    <p>Client login is coming soon. For now, call or email us and we will help you.</p>
+    <button type="button" class="btn small" id="signin-close">Close</button>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
