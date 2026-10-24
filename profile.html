@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your details | WebMaker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-card wide">
+    <h1>Tell us about you</h1>
+    <p class="muted">We ask this only once. It helps us serve you better.</p>
+
+    <form id="profile-form" class="form">
+      <div class="row">
+        <label>Full name *
+          <input type="text" name="name" required autocomplete="name">
+        </label>
+        <label>Phone number *
+          <input type="tel" name="phone" required pattern="[0-9+\s\-]{7,18}" title="Enter a valid phone number" autocomplete="tel">
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Email
+          <input type="email" name="email" readonly>
+        </label>
+        <label>Age *
+          <input type="number" name="age" required min="10" max="100">
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Gender *
+          <select name="gender" required>
+            <option value="">Choose</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+            <option>Prefer not to say</option>
+          </select>
+        </label>
+      </div>
+
+      <fieldset class="choice">
+        <legend>You are a *</legend>
+        <label><input type="radio" name="status" value="Student" required> Student</label>
+        <label><input type="radio" name="status" value="Employee"> Employee</label>
+      </fieldset>
+
+      <button type="submit" class="btn">Continue</button>
+      <p id="profile-status" role="status"></p>
+    </form>
+  </main>
+
+  <script type="module" src="profile.js"></script>
+</body>
+</html>

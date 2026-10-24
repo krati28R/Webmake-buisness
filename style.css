@@ -115,3 +115,23 @@ dialog p { margin-bottom: 18px; }
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .line > span, .hero-sub, .hero-actions, .js .reveal { opacity: 1; transform: none; }
 }
+/* ---------- LOGIN / PROFILE / SUCCESS ---------- */
+[hidden] { display: none !important; }
+.pending { visibility: hidden; }
+.hello { font-weight: 600; color: var(--teal); }
+.footer a { text-decoration: underline; }
+
+.auth-page { min-height: 100vh; display: grid; place-items: center; padding: 20px; background: var(--mist); }
+.auth-card { width: 100%; max-width: 440px; background: #fff; padding: 32px 28px; border-radius: 16px;
+  box-shadow: 0 18px 44px rgba(14,74,90,.15); display: grid; gap: 14px; }
+.auth-card.wide { max-width: 580px; }
+.auth-card h1 { font-size: 1.9rem; }
+.google-btn { width: 100%; padding: 13px; border: 1px solid #b9c9d2; border-radius: 10px; background: #fff;
+  font: inherit; font-weight: 600; cursor: pointer; }
+.google-btn:hover { background: var(--bg); }
+.divider { text-align: center; color: #6a7a86; font-size: .9rem; }
+
+.success { max-width: 680px; background: #fff; border: 1px solid #cfe5d6; border-left: 6px solid #1b6b3a;
+  border-radius: 14px; padding: 28px; }
+.success h3 { color: #1b6b3a; font-size: 1.6rem; margin-bottom: 8px; }
+.success .btn { margin-top: 16px; }
