@@ -15,6 +15,7 @@
 <!-- "pending" hides the page until script.js confirms the visitor is signed in -->
 <body class="pending">
 
+  <!-- NAVBAR -->
   <header class="nav">
     <a href="#home" class="logo">
       <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true">
@@ -34,15 +35,58 @@
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero" id="home">
-      <h1><span class="line"><span>We build websites for your business.</span></span></h1>
-      <p class="hero-sub">Clear, fast websites for local businesses, built around what your customers need.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn">Start your project</a>
-        <a href="#services" class="btn ghost">See what we do</a>
+      <div class="hero-text">
+        <p class="eyebrow">Websites for local businesses</p>
+        <h1><span class="line"><span>We build websites for your business.</span></span></h1>
+        <p class="hero-sub">Clear, fast websites for local businesses, built around what your customers need.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn">Start your project</a>
+          <a href="#services" class="btn ghost">See what we do</a>
+        </div>
+        <ul class="hero-points">
+          <li>Works on phones</li>
+          <li>Live with HTTPS</li>
+          <li>Call or email support</li>
+        </ul>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg">
+          <g class="win">
+            <rect x="20" y="20" width="340" height="260" rx="16" fill="#fff" stroke="#d5e2e9" stroke-width="2"/>
+            <path d="M20 36a16 16 0 0 1 16-16h308a16 16 0 0 1 16 16v28H20z" fill="#0e4a5a"/>
+            <circle cx="44" cy="42" r="6" fill="#f2a93b"/>
+            <circle cx="62" cy="42" r="6" fill="#e3edf2"/>
+            <circle cx="80" cy="42" r="6" fill="#e3edf2"/>
+            <rect x="110" y="34" width="160" height="16" rx="8" fill="#fff" opacity=".2"/>
+            <rect x="44" y="90" width="150" height="14" rx="7" fill="#0e4a5a"/>
+            <rect x="44" y="114" width="110" height="14" rx="7" fill="#0e4a5a"/>
+            <rect x="44" y="146" width="150" height="8" rx="4" fill="#d5e2e9"/>
+            <rect x="44" y="162" width="120" height="8" rx="4" fill="#d5e2e9"/>
+            <rect x="44" y="190" width="96" height="32" rx="8" fill="#f2a93b"/>
+            <rect x="200" y="90" width="90" height="110" rx="12" fill="#e3edf2"/>
+            <circle cx="228" cy="118" r="12" fill="#f2a93b"/>
+            <path d="M200 200 L236 150 L258 180 L274 162 L290 200 Z" fill="#0e4a5a" opacity=".85"/>
+            <rect x="44" y="236" width="84" height="28" rx="6" fill="#e3edf2"/>
+            <rect x="138" y="236" width="84" height="28" rx="6" fill="#e3edf2"/>
+            <rect x="232" y="236" width="84" height="28" rx="6" fill="#e3edf2"/>
+          </g>
+          <g class="phone">
+            <rect x="300" y="120" width="100" height="190" rx="18" fill="#17212b"/>
+            <rect x="308" y="132" width="84" height="166" rx="10" fill="#fff"/>
+            <rect x="316" y="146" width="50" height="8" rx="4" fill="#0e4a5a"/>
+            <rect x="316" y="164" width="68" height="50" rx="6" fill="#e3edf2"/>
+            <rect x="316" y="226" width="68" height="8" rx="4" fill="#d5e2e9"/>
+            <rect x="316" y="242" width="40" height="8" rx="4" fill="#d5e2e9"/>
+            <rect x="316" y="266" width="68" height="20" rx="6" fill="#f2a93b"/>
+          </g>
+        </svg>
       </div>
     </section>
 
+    <!-- WHAT WE DO -->
     <section class="section" id="services">
       <h2 class="reveal">What we do</h2>
       <div class="cards">
@@ -64,6 +108,7 @@
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section class="section band" id="about">
       <div class="about">
         <div class="reveal">
@@ -78,50 +123,113 @@
       </div>
     </section>
 
+    <!-- REVIEWS -->
     <section class="section" id="reviews">
       <h2 class="reveal">Reviews</h2>
-      <p class="reveal muted">Reviews from our clients will appear here.</p>
+      <div class="rating-summary reveal" id="rating-summary" hidden>
+        <strong id="avg-score">0.0</strong>
+        <span class="stars" id="avg-stars" aria-hidden="true"></span>
+        <span id="review-count" class="muted"></span>
+      </div>
+      <div class="review-list" id="review-list"></div>
+      <p class="muted" id="no-reviews">No reviews yet. Be the first to share your experience.</p>
+      <button type="button" class="btn ghost" id="write-review-btn">Write a review</button>
     </section>
 
+    <!-- BUSINESS DETAILS FORM -->
     <section class="section band" id="contact">
       <h2 class="reveal">Tell us about your business</h2>
 
       <form id="contact-form" class="form reveal">
-        <!-- PASTE YOUR WEB3FORMS KEY between the quotes below -->
-        <input type="hidden" name="access_key" value="33487211-5227-4699-8a93-bfdb6c794230">
-        <input type="hidden" name="subject" value="New business enquiry from your website">
         <input type="checkbox" name="botcheck" class="trap" tabindex="-1" autocomplete="off">
 
-        <div class="row">
-          <label>Your name *
-            <input type="text" name="name" required autocomplete="name">
-          </label>
-          <label>Business name *
-            <input type="text" name="business_name" required autocomplete="organization">
-          </label>
-        </div>
-        <div class="row">
-          <label>Phone number *
-            <input type="tel" name="phone" required pattern="[0-9+\s\-]{7,18}" title="Enter a valid phone number" autocomplete="tel">
-          </label>
+        <fieldset class="group">
+          <legend>1. About you</legend>
+          <div class="row">
+            <label>Your name *
+              <input type="text" name="name" required autocomplete="name">
+            </label>
+            <label>Phone number *
+              <input type="tel" name="phone" required pattern="[0-9+\s\-]{7,18}" title="Enter a valid phone number" autocomplete="tel">
+            </label>
+          </div>
           <label>Email *
             <input type="email" name="email" required autocomplete="email">
           </label>
-        </div>
-        <label>Photo of your business and logo (paste a link)
-          <input type="url" name="photo_link" placeholder="Google Drive, Instagram or Facebook link">
-        </label>
-        <label>About your business *
-          <textarea name="about_business" rows="3" required placeholder="What do you do, who are your customers, where are you located?"></textarea>
-        </label>
-        <label>What do you need in the website?
-          <textarea name="website_requirements" rows="4" placeholder="Pages, colors, features, websites you like, deadline, anything specific."></textarea>
-        </label>
-        <fieldset class="choice">
-          <legend>Do you need maintenance after the website is live? *</legend>
-          <label><input type="radio" name="maintenance" value="Yes" required> Yes</label>
-          <label><input type="radio" name="maintenance" value="No"> No</label>
         </fieldset>
+
+        <fieldset class="group">
+          <legend>2. Your business</legend>
+          <div class="row">
+            <label>Business name *
+              <input type="text" name="business_name" required autocomplete="organization">
+            </label>
+            <label>Business type
+              <select name="business_type">
+                <option>Cafe or restaurant</option>
+                <option>Shop or retail</option>
+                <option>Salon or spa</option>
+                <option>Clinic or health</option>
+                <option>Education or coaching</option>
+                <option>Services</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+          <label>About your business *
+            <textarea name="about_business" rows="3" required placeholder="What do you do and who are your customers?"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>3. Business location</legend>
+          <label>Street address *
+            <input type="text" name="address" required autocomplete="street-address">
+          </label>
+          <div class="row">
+            <label>City *
+              <input type="text" name="city" required autocomplete="address-level2">
+            </label>
+            <label>State
+              <input type="text" name="state" autocomplete="address-level1">
+            </label>
+          </div>
+          <div class="row">
+            <label>PIN code
+              <input type="text" name="pincode" inputmode="numeric" pattern="[0-9]{6}" title="6 digit PIN code" autocomplete="postal-code">
+            </label>
+            <label>Google Maps link (optional)
+              <input type="url" name="maps_link" placeholder="https://maps.google.com/...">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>4. Photos and logo (links)</legend>
+          <p class="hint">Upload your files to Google Drive, Instagram or any site, then paste the link here. JPG, JPEG, PNG, WEBP and PDF all work. In Google Drive set sharing to "Anyone with the link can view".</p>
+          <label>Logo link
+            <input type="url" name="logo_link" placeholder="https://...">
+          </label>
+          <label>Business photo link
+            <input type="url" name="photo_link" placeholder="https://...">
+          </label>
+          <label>More photo links (one per line)
+            <textarea name="more_links" rows="3"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>5. What you need</legend>
+          <label>What do you need in the website?
+            <textarea name="website_requirements" rows="4" placeholder="Pages, colors, features, websites you like, deadline."></textarea>
+          </label>
+          <fieldset class="choice">
+            <legend>Do you need maintenance after the website is live? *</legend>
+            <label><input type="radio" name="maintenance" value="Yes" required> Yes</label>
+            <label><input type="radio" name="maintenance" value="No"> No</label>
+          </fieldset>
+        </fieldset>
+
         <button type="submit" class="btn">Send details</button>
         <p id="form-status" role="status"></p>
       </form>
@@ -137,12 +245,28 @@
 
   <footer class="footer">
     <p>&copy; 2026 WebMaker</p>
-    <!-- Replace with your REAL number and email, in BOTH the link and the text -->
-    <p>
-      <a href="tel:+919897032250">+91 00000 00000</a> &middot;
-      <a href="krati228j@gmail.com">hello@webmaker.example</a>
-    </p>
+    <p><a id="footer-phone" href="#"></a> &middot; <a id="footer-email" href="#"></a></p>
   </footer>
+
+  <!-- Rating popup -->
+  <dialog id="review-dialog">
+    <form id="review-form">
+      <h3>How was your experience?</h3>
+      <div class="star-input" id="star-input" role="group" aria-label="Rating">
+        <button type="button" data-v="1" aria-label="1 star">&#9733;</button>
+        <button type="button" data-v="2" aria-label="2 stars">&#9733;</button>
+        <button type="button" data-v="3" aria-label="3 stars">&#9733;</button>
+        <button type="button" data-v="4" aria-label="4 stars">&#9733;</button>
+        <button type="button" data-v="5" aria-label="5 stars">&#9733;</button>
+      </div>
+      <textarea id="review-text" rows="4" maxlength="500" required placeholder="Write your feedback (max 500 characters)"></textarea>
+      <p id="review-status" role="status"></p>
+      <div class="dialog-actions">
+        <button type="submit" class="btn">Submit review</button>
+        <button type="button" class="btn ghost" id="review-close">Maybe later</button>
+      </div>
+    </form>
+  </dialog>
 
   <script type="module" src="script.js"></script>
 </body>
