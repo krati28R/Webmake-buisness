@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WebMaker</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e4a5a'/%3E%3Cpath d='M11 20 L21.5 46 L32 27 L42.5 46 L53 20' fill='none' stroke='%23f2a93b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --teal: #0e4a5a;   /* logo ka green */
+      --sun: #f2a93b;    /* logo ka yellow */
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --body: "Instrument Sans", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      background: var(--teal);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      transition: opacity .6s ease;      /* page se bahar jaate waqt fade out */
+    }
+    body.leaving { opacity: 0; }
+
+    /* Peeche halki yellow glow */
+    .glow {
+      position: fixed; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(242,169,59,.20), transparent 45%);
+      opacity: 0;
+      animation: glow 1.4s .2s ease forwards;
+    }
+    @keyframes glow { to { opacity: 1; } }
+
+    .wrap { position: relative; display: grid; justify-items: center; gap: 22px; padding: 20px; }
+    .stage { display: flex; align-items: center; justify-content: center; }
+
+    /* ---------- 1. LOGO (yellow W): zoom in + lines draw hoti hain ---------- */
+    .mark {
+      width: clamp(70px, 14vw, 130px);
+      height: auto;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: scale(.15);
+      animation: zoomIn 1.2s .15s cubic-bezier(.2, .9, .25, 1.15) forwards;
+    }
+    @keyframes zoomIn {
+      0%   { opacity: 0; transform: scale(.15); }
+      60%  { opacity: 1; }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .mark path {
+      stroke-dasharray: 100;           /* pathLength=100 hai, isliye 100 = poori line */
+      stroke-dashoffset: 100;          /* shuru mein line chhupi hui */
+      animation: draw 1s .35s ease forwards;
+    }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    /* ---------- 2. NAAM: ek-ek letter ---------- */
+    .word {
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+      max-width: 0;                    /* shuru mein band, phir khulta hai */
+      padding-bottom: .08em;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 9vw, 5.2rem);
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      animation: grow .9s 1.6s ease forwards;
+    }
+    @keyframes grow { to { max-width: 6em; margin-left: .3em; } }
+
+    .word span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(60%);
+      animation: letter .5s cubic-bezier(.2, .8, .2, 1) forwards;
+      animation-delay: calc(1.6s + var(--i) * .09s);   /* har letter .09s baad */
+    }
+    @keyframes letter { to { opacity: 1; transform: none; } }
+    .word .alt { color: var(--sun); }
+
+    /* ---------- 3. TAGLINE + LINE ---------- */
+    .tagline {
+      font-family: var(--body);
+      font-size: clamp(.8rem, 2.4vw, 1rem);
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.78);
+      opacity: 0;
+      animation: fade .8s 2.9s ease forwards;
+    }
+    .bar {
+      height: 3px; width: 0; border-radius: 3px; background: var(--sun);
+      animation: bar .8s 2.7s ease forwards;
+    }
+    @keyframes bar  { to { width: min(220px, 50vw); } }
+    @keyframes fade { to { opacity: 1; } }
+
+    .skip {
+      position: fixed; right: 18px; bottom: 18px;
+      background: none; border: 1px solid rgba(255,255,255,.4); color: #fff;
+      padding: 7px 16px; border-radius: 99px;
+      font-family: var(--body); font-size: .9rem; cursor: pointer;
+    }
+    .skip:hover { background: rgba(255,255,255,.12); }
+
+    /* Jinhone device mein "reduce motion" on kiya hai unke liye seedha final look */
+    @media (prefers-reduced-motion: reduce) {
+      .glow, .mark, .word span, .tagline { opacity: 1; transform: none; animation: none; }
+      .mark path { stroke-dashoffset: 0; animation: none; }
+      .word { max-width: none; margin-left: .3em; animation: none; }
+      .bar { width: 200px; animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <main class="wrap">
+    <div class="stage">
+      <!-- Sirf yellow W, kyunki background pehle se logo wala green hai -->
+      <svg class="mark" viewBox="6 15 52 36" aria-hidden="true">
+        <path pathLength="100" d="M11 20 L21.5 46 L32 27 L42.5 46 L53 20"
+              fill="none" stroke="#f2a93b" stroke-width="6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <h1 class="word" aria-label="WebMaker">
+        <span style="--i:0" aria-hidden="true">W</span>
+        <span style="--i:1" aria-hidden="true">e</span>
+        <span style="--i:2" aria-hidden="true">b</span>
+        <span style="--i:3" class="alt" aria-hidden="true">M</span>
+        <span style="--i:4" class="alt" aria-hidden="true">a</span>
+        <span style="--i:5" class="alt" aria-hidden="true">k</span>
+        <span style="--i:6" class="alt" aria-hidden="true">e</span>
+        <span style="--i:7" class="alt" aria-hidden="true">r</span>
+      </h1>
+    </div>
+
+    <div class="bar"></div>
+    <p class="tagline">Websites for your business</p>
+  </main>
+
+  <button class="skip" id="skip" type="button">Skip</button>
+
+  <script>
+    var NEXT = 'login.html';   // intro ke baad kahan jana hai
+    var left = false;
+
+    function go() {
+      if (left) return;
+      left = true;
+      document.body.classList.add('leaving');            // fade out
+      setTimeout(function () { location.replace(NEXT); }, 600);
+    }
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(go, reduce ? 1200 : 4600);                // apne aap aage jao
+    document.getElementById('skip').addEventListener('click', go);
+  </script>
+</body>
+</html>

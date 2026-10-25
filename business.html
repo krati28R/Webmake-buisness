@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your business | WebMaker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="pending" data-page="business">
+  <header id="top"></header>
+
+  <section class="q-hero short">
+    <div><h1 id="type" data-text="Tell us about your business"></h1><p>It takes about two minutes.</p></div>
+  </section>
+
+  <section class="section band">
+    <form id="bf" class="form">
+      <input type="checkbox" name="botcheck" class="trap" tabindex="-1" autocomplete="off">
+
+      <fieldset class="group reveal"><legend>1. About you</legend>
+        <div class="row">
+          <label>Your name *<input type="text" name="name" required></label>
+          <label>Phone number *<input type="tel" name="phone" required pattern="[0-9+\s\-]{7,18}" title="Enter a valid phone number"></label>
+        </div>
+        <label>Email *<input type="email" name="email" required></label>
+      </fieldset>
+
+      <fieldset class="group reveal"><legend>2. Your business</legend>
+        <div class="row">
+          <label>Business name *<input type="text" name="business_name" required></label>
+          <label>Business type
+            <select name="business_type">
+              <option>Cafe or restaurant</option><option>Shop or retail</option><option>Salon or spa</option>
+              <option>Clinic or health</option><option>Education or coaching</option><option>Services</option><option>Other</option>
+            </select>
+          </label>
+        </div>
+        <label>About your business *<textarea name="about_business" rows="3" required></textarea></label>
+      </fieldset>
+
+      <fieldset class="group reveal"><legend>3. Business location</legend>
+        <label>Street address *<input type="text" name="address" required></label>
+        <div class="row">
+          <label>City *<input type="text" name="city" required></label>
+          <label>State<input type="text" name="state"></label>
+        </div>
+        <div class="row">
+          <label>PIN code<input type="text" name="pincode" inputmode="numeric" pattern="[0-9]{6}" title="6 digit PIN code"></label>
+          <label>Google Maps link (optional)<input type="url" name="maps_link" placeholder="https://maps.google.com/..."></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="group reveal"><legend>4. Photos and logo (links)</legend>
+        <p class="hint">Upload to Google Drive or Instagram and paste the link. JPG, JPEG, PNG, WEBP and PDF work. In Drive choose "Anyone with the link can view".</p>
+        <label>Logo link<input type="url" name="logo_link" placeholder="https://..."></label>
+        <label>Business photo link<input type="url" name="photo_link" placeholder="https://..."></label>
+        <label>More links (one per line)<textarea name="more_links" rows="3"></textarea></label>
+      </fieldset>
+
+      <fieldset class="group reveal"><legend>5. What you need</legend>
+        <label>What do you need in the website?<textarea name="website_requirements" rows="4"></textarea></label>
+        <fieldset class="choice"><legend>Do you need maintenance after the website is live? *</legend>
+          <label><input type="radio" name="maintenance" value="Yes" required> Yes</label>
+          <label><input type="radio" name="maintenance" value="No"> No</label>
+        </fieldset>
+      </fieldset>
+
+      <button type="submit" class="btn">Send details</button>
+      <p id="fs" role="status"></p>
+    </form>
+  </section>
+
+  <script type="module" src="pages.js"></script>
+</body>
+</html>

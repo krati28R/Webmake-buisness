@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thank you | WebMaker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="pending" data-page="thanks">
+  <header id="top"></header>
+
+  <main class="thanks">
+    <svg class="tick" viewBox="0 0 80 80" width="96" height="96" aria-hidden="true">
+      <circle cx="40" cy="40" r="36" fill="#1b6b3a"/>
+      <path class="once" pathLength="100" d="M24 41l11 11 22-24" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h1>Information submitted</h1>
+    <p class="muted">Thank you. We have your business details and will contact you soon.</p>
+
+    <section class="card reveal">
+      <h3>How was this experience?</h3>
+      <form id="rf" class="form">
+        <div class="star-input" id="stars" role="group" aria-label="Rating">
+          <button type="button" data-v="1" aria-label="1 star">&#9733;</button>
+          <button type="button" data-v="2" aria-label="2 stars">&#9733;</button>
+          <button type="button" data-v="3" aria-label="3 stars">&#9733;</button>
+          <button type="button" data-v="4" aria-label="4 stars">&#9733;</button>
+          <button type="button" data-v="5" aria-label="5 stars">&#9733;</button>
+        </div>
+        <textarea id="rtext" rows="3" maxlength="500" required placeholder="Your feedback (max 500 characters)"></textarea>
+        <button type="submit" class="btn">Submit feedback</button>
+        <p id="rs" role="status"></p>
+      </form>
+      <p id="rdone" class="ok" hidden>Thank you for your feedback!</p>
+    </section>
+
+    <section class="card reveal">
+      <h3>One call or one email, and we respond</h3>
+      <p class="muted">We read every enquiry and get back to you.</p>
+      <p><a class="btn ph" href="#"></a> <a class="btn ghost em" href="#"></a></p>
+    </section>
+  </main>
+
+  <script type="module" src="pages.js"></script>
+</body>
+</html>
