@@ -43,7 +43,7 @@ document.getElementById('google-btn').addEventListener('click', async () => {
   catch (err) { say(friendly(err), 'error'); }
 });
 
-// ---------- Show / hide password ----------
+// Show / hide password
 const toggle = document.getElementById('pw-toggle');
 toggle.addEventListener('click', () => {
   const hidden = pwInput.type === 'password';
@@ -51,7 +51,7 @@ toggle.addEventListener('click', () => {
   toggle.textContent = hidden ? 'Hide' : 'Show';
 });
 
-// ---------- Strong password suggestion (different every click) ----------
+// Strong password suggestion (different every click)
 function randomIndex(n) {
   const a = new Uint32Array(1);
   const limit = Math.floor(4294967296 / n) * n;
@@ -62,9 +62,9 @@ function randomIndex(n) {
 function strongPassword(len = 14) {
   const sets = ['ABCDEFGHJKLMNPQRSTUVWXYZ', 'abcdefghijkmnopqrstuvwxyz', '23456789', '!@#$%&*?'];
   const all = sets.join('');
-  const chars = sets.map(s => s[randomIndex(s.length)]);          // at least one of each kind
+  const chars = sets.map(s => s[randomIndex(s.length)]);
   while (chars.length < len) chars.push(all[randomIndex(all.length)]);
-  for (let i = chars.length - 1; i > 0; i--) {                    // shuffle
+  for (let i = chars.length - 1; i > 0; i--) {
     const j = randomIndex(i + 1);
     [chars[i], chars[j]] = [chars[j], chars[i]];
   }

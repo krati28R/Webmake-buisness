@@ -4,10 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WebMaker | Websites for your business</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e4a5a'/%3E%3Cpath d='M11 20 L21.5 46 L32 27 L42.5 46 L53 20' fill='none' stroke='%23f2a93b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
+  <script>
+    /* Safety net: if the page is still hidden after 8 seconds, show it with a message */
+    setTimeout(function () {
+      if (document.body.classList.contains('pending')) {
+        document.body.classList.remove('pending');
+        var m = document.createElement('p');
+        m.style.cssText = 'padding:16px;background:#fde8e8;color:#b3261e;font-weight:600';
+        m.textContent = 'The page could not load fully. Press Ctrl+Shift+R. If this stays, press F12, open Console and check the red error.';
+        document.body.prepend(m);
+      }
+    }, 8000);
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="pending" data-page="home">
@@ -22,6 +35,7 @@
     </div>
   </section>
 
+  <!-- 1. Website making: developer coding in a dark room -->
   <section id="s1"><div class="scene">
     <div class="scene-text reveal"><span class="tag">01</span><h2>We make your website</h2>
       <p>Your idea, designed and coded by a real person, and built to work on every phone.</p></div>
@@ -54,6 +68,7 @@
     </div>
   </div></section>
 
+  <!-- 2. Graphic design -->
   <section class="band"><div class="scene flip">
     <div class="scene-text reveal"><span class="tag">02</span><h2>We design your brand</h2>
       <p>Logo, banners and graphics in your colors, so everything looks like one brand.</p></div>
@@ -74,6 +89,7 @@
     </div>
   </div></section>
 
+  <!-- 3. Deployment and maintenance -->
   <section><div class="scene">
     <div class="scene-text reveal"><span class="tag">03</span><h2>We put it live and look after it</h2>
       <p>Your site goes live with HTTPS, and we keep it updated when your details change.</p></div>

@@ -8,6 +8,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
+  <script>
+    setTimeout(function () {
+      if (document.body.classList.contains('pending')) {
+        document.body.classList.remove('pending');
+        var m = document.createElement('p');
+        m.style.cssText = 'padding:16px;background:#fde8e8;color:#b3261e;font-weight:600';
+        m.textContent = 'The page could not load fully. Press Ctrl+Shift+R. If this stays, press F12, open Console and check the red error.';
+        document.body.prepend(m);
+      }
+    }, 8000);
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="pending" data-page="business">
