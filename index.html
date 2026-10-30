@@ -3,146 +3,171 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WebMaker | Websites for your business</title>
+  <title>WebMaker</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e4a5a'/%3E%3Cpath d='M11 20 L21.5 46 L32 27 L42.5 46 L53 20' fill='none' stroke='%23f2a93b' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <script>document.documentElement.classList.add('js');</script>
-  <script>
-    /* Safety net: if the page is still hidden after 8 seconds, show it with a message */
-    setTimeout(function () {
-      if (document.body.classList.contains('pending')) {
-        document.body.classList.remove('pending');
-        var m = document.createElement('p');
-        m.style.cssText = 'padding:16px;background:#fde8e8;color:#b3261e;font-weight:600';
-        m.textContent = 'The page could not load fully. Press Ctrl+Shift+R. If this stays, press F12, open Console and check the red error.';
-        document.body.prepend(m);
-      }
-    }, 8000);
-  </script>
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --teal: #0e4a5a;
+      --sun: #f2a93b;
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --body: "Instrument Sans", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--teal);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      transition: opacity .6s ease;
+    }
+    body.leaving { opacity: 0; }
+
+    .glow {
+      position: fixed; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(242,169,59,.20), transparent 45%);
+      opacity: 0;
+      animation: glow 1.4s .2s ease forwards;
+    }
+    @keyframes glow { to { opacity: 1; } }
+
+    .wrap { position: relative; display: grid; justify-items: center; gap: 22px; padding: 20px; }
+    .stage { display: flex; align-items: center; justify-content: center; }
+
+    .mark {
+      width: clamp(70px, 14vw, 130px);
+      height: auto;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: scale(.15);
+      animation: zoomIn 1.2s .15s cubic-bezier(.2, .9, .25, 1.15) forwards;
+    }
+    @keyframes zoomIn {
+      0%   { opacity: 0; transform: scale(.15); }
+      60%  { opacity: 1; }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .mark path {
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: draw 1s .35s ease forwards;
+    }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    .word {
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+      max-width: 0;
+      padding-bottom: .08em;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 9vw, 5.2rem);
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      animation: grow .9s 1.6s ease forwards;
+    }
+    @keyframes grow { to { max-width: 6em; margin-left: .3em; } }
+
+    .word span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(60%);
+      animation: letter .5s cubic-bezier(.2, .8, .2, 1) forwards;
+      animation-delay: calc(1.6s + var(--i) * .09s);
+    }
+    @keyframes letter { to { opacity: 1; transform: none; } }
+    .word .alt { color: var(--sun); }
+
+    .tagline {
+      font-family: var(--body);
+      font-size: clamp(.8rem, 2.4vw, 1rem);
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.78);
+      opacity: 0;
+      animation: fade .8s 2.9s ease forwards;
+    }
+    .bar {
+      height: 3px; width: 0; border-radius: 3px; background: var(--sun);
+      animation: bar .8s 2.7s ease forwards;
+    }
+    @keyframes bar  { to { width: min(220px, 50vw); } }
+    @keyframes fade { to { opacity: 1; } }
+
+    .skip {
+      position: fixed; right: 18px; bottom: 18px;
+      background: none; border: 1px solid rgba(255,255,255,.4); color: #fff;
+      padding: 7px 16px; border-radius: 99px;
+      font-family: var(--body); font-size: .9rem; cursor: pointer;
+    }
+    .skip:hover { background: rgba(255,255,255,.12); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .glow, .mark, .word span, .tagline { opacity: 1; transform: none; animation: none; }
+      .mark path { stroke-dashoffset: 0; animation: none; }
+      .word { max-width: none; margin-left: .3em; animation: none; }
+      .bar { width: 200px; animation: none; }
+    }
+  </style>
 </head>
-<body class="pending" data-page="home">
-  <header id="top"></header>
+<body>
+  <div class="glow"></div>
 
-  <section class="q-hero">
-    <div>
-      <div class="q-mark">?</div>
-      <h1 id="type" data-text="What do we actually do?"></h1>
-      <p>Scroll down and see for yourself.</p>
-      <a class="scroll" href="#s1">&#8595;</a>
-    </div>
-  </section>
-
-  <!-- 1. Website making: developer coding in a dark room -->
-  <section id="s1"><div class="scene">
-    <div class="scene-text reveal"><span class="tag">01</span><h2>We make your website</h2>
-      <p>Your idea, designed and coded by a real person, and built to work on every phone.</p></div>
-    <div class="scene-art reveal">
-      <svg viewBox="0 0 400 260" aria-label="A developer coding a website in a dark room">
-        <rect width="400" height="260" fill="#0a1a22"/>
-        <rect x="270" y="24" width="100" height="80" rx="6" fill="#10303d" stroke="#1e4a5b" stroke-width="3"/>
-        <circle cx="344" cy="48" r="11" fill="#f6e7b4"/>
-        <circle class="tw" style="--d:0s" cx="290" cy="42" r="2" fill="#fff"/>
-        <circle class="tw" style="--d:.8s" cx="314" cy="84" r="2" fill="#fff"/>
-        <path d="M64 98h12l54 107H20z" fill="#f2a93b" opacity=".12"/>
-        <path d="M70 98V200M55 80h30l-9 18H64z" stroke="#8aa0ab" stroke-width="3" fill="#f2a93b"/>
-        <rect x="20" y="200" width="360" height="14" fill="#2b3b45"/>
-        <rect x="44" y="214" width="10" height="46" fill="#2b3b45"/>
-        <rect x="346" y="214" width="10" height="46" fill="#2b3b45"/>
-        <path d="M128 214V162q0-20 22-20t22 20v52z" fill="#1f6f85"/>
-        <circle cx="150" cy="122" r="16" fill="#f0c9a0"/>
-        <path d="M134 120q2-18 16-18t16 18q-16-8-32 0z" fill="#17212b"/>
-        <rect class="arm" x="160" y="166" width="54" height="10" rx="5" fill="#1f6f85"/>
-        <rect x="215" y="112" width="104" height="78" rx="5" fill="#0e2530" stroke="#4a5d68" stroke-width="4"/>
-        <rect x="205" y="190" width="124" height="10" rx="3" fill="#4a5d68"/>
-        <rect class="ln" style="--d:0" x="226" y="124" width="50" height="6" rx="3" fill="#f2a93b"/>
-        <rect class="ln" style="--d:1" x="236" y="136" width="60" height="6" rx="3" fill="#7fd1e6"/>
-        <rect class="ln" style="--d:2" x="236" y="148" width="40" height="6" rx="3" fill="#fff" opacity=".8"/>
-        <rect class="ln" style="--d:3" x="226" y="160" width="68" height="6" rx="3" fill="#f2a93b"/>
-        <rect class="ln" style="--d:4" x="236" y="172" width="34" height="6" rx="3" fill="#7fd1e6"/>
-        <rect x="342" y="180" width="16" height="20" rx="3" fill="#f2a93b"/>
-        <path class="steam" d="M346 174q-4-8 0-14M354 174q-4-8 0-14" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <main class="wrap">
+    <div class="stage">
+      <svg class="mark" viewBox="6 15 52 36" aria-hidden="true">
+        <path pathLength="100" d="M11 20 L21.5 46 L32 27 L42.5 46 L53 20"
+              fill="none" stroke="#f2a93b" stroke-width="6"
+              stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
+
+      <h1 class="word" aria-label="WebMaker">
+        <span style="--i:0" aria-hidden="true">W</span>
+        <span style="--i:1" aria-hidden="true">e</span>
+        <span style="--i:2" aria-hidden="true">b</span>
+        <span style="--i:3" class="alt" aria-hidden="true">M</span>
+        <span style="--i:4" class="alt" aria-hidden="true">a</span>
+        <span style="--i:5" class="alt" aria-hidden="true">k</span>
+        <span style="--i:6" class="alt" aria-hidden="true">e</span>
+        <span style="--i:7" class="alt" aria-hidden="true">r</span>
+      </h1>
     </div>
-  </div></section>
 
-  <!-- 2. Graphic design -->
-  <section class="band"><div class="scene flip">
-    <div class="scene-text reveal"><span class="tag">02</span><h2>We design your brand</h2>
-      <p>Logo, banners and graphics in your colors, so everything looks like one brand.</p></div>
-    <div class="scene-art reveal">
-      <svg viewBox="0 0 400 260" aria-label="Graphic design in progress">
-        <rect width="400" height="260" fill="#e3edf2"/>
-        <rect x="60" y="30" width="280" height="170" rx="12" fill="#fff"/>
-        <circle class="pop" style="--d:0s" cx="130" cy="95" r="30" fill="#f2a93b"/>
-        <rect class="pop" style="--d:.5s" x="180" y="65" width="60" height="60" rx="12" fill="#0e4a5a"/>
-        <path class="pop" style="--d:1s" d="M265 125L295 70L325 125z" fill="#f2a93b"/>
-        <path class="dr" pathLength="100" d="M90 165Q150 130 210 165T330 160" fill="none" stroke="#0e4a5a" stroke-width="5" stroke-linecap="round"/>
-        <circle class="pop" style="--d:0s" cx="120" cy="232" r="11" fill="#f2a93b"/>
-        <circle class="pop" style="--d:.3s" cx="160" cy="232" r="11" fill="#0e4a5a"/>
-        <circle class="pop" style="--d:.6s" cx="200" cy="232" r="11" fill="#7fd1e6"/>
-        <circle class="pop" style="--d:.9s" cx="240" cy="232" r="11" fill="#17212b"/>
-        <path class="floaty" d="M300 214l16-16 8 8-16 16-12 4z" fill="#f2a93b"/>
-      </svg>
-    </div>
-  </div></section>
+    <div class="bar"></div>
+    <p class="tagline">Websites for your business</p>
+  </main>
 
-  <!-- 3. Deployment and maintenance -->
-  <section><div class="scene">
-    <div class="scene-text reveal"><span class="tag">03</span><h2>We put it live and look after it</h2>
-      <p>Your site goes live with HTTPS, and we keep it updated when your details change.</p></div>
-    <div class="scene-art reveal">
-      <svg viewBox="0 0 400 260" aria-label="A website going live">
-        <rect width="400" height="260" fill="#0e4a5a"/>
-        <circle class="tw" style="--d:0s" cx="40" cy="40" r="2" fill="#fff"/>
-        <circle class="tw" style="--d:1s" cx="380" cy="30" r="2" fill="#fff"/>
-        <g class="floaty">
-          <rect x="70" y="50" width="250" height="160" rx="12" fill="#fff"/>
-          <path d="M70 62a12 12 0 0 1 12-12h226a12 12 0 0 1 12 12v22H70z" fill="#e3edf2"/>
-          <rect x="105" y="60" width="150" height="16" rx="8" fill="#fff"/>
-          <rect x="112" y="64" width="9" height="8" rx="2" fill="#1b6b3a"/>
-          <rect x="90" y="104" width="120" height="10" rx="5" fill="#0e4a5a"/>
-          <rect x="90" y="124" width="90" height="8" rx="4" fill="#d5e2e9"/>
-          <circle cx="260" cy="150" r="26" fill="#1b6b3a"/>
-          <path class="chk" pathLength="100" d="M248 150l9 9 17-19" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="236" y="196" font-size="14" fill="#1b6b3a" font-weight="700" font-family="sans-serif">LIVE</text>
-        </g>
-        <g class="rocket">
-          <path d="M352 190q-14-30 0-58 14 28 0 58z" fill="#f2a93b"/>
-          <circle cx="352" cy="160" r="5" fill="#0e4a5a"/>
-          <path class="flame" d="M346 192h12l-6 22z" fill="#fff"/>
-        </g>
-        <circle class="spin" cx="60" cy="225" r="16" fill="none" stroke="#f2a93b" stroke-width="7" stroke-dasharray="7 6"/>
-      </svg>
-    </div>
-  </div></section>
+  <button class="skip" id="skip" type="button">Skip</button>
 
-  <section class="section band">
-    <div class="about">
-      <div class="reveal">
-        <h2>One call or one email, and we respond</h2>
-        <p>Tell us what you need and we will get back to you. You always talk directly to the people doing the work.</p>
-      </div>
-      <ul class="promises reveal">
-        <li><strong>Call us</strong><span>We pick up and answer your questions.</span></li>
-        <li><strong>Email us</strong><span>We reply to every message.</span></li>
-        <li><strong>Best service</strong><span>We do the work properly and support you after.</span></li>
-      </ul>
-    </div>
-  </section>
+  <!-- 1. Timing and redirect (works even if Firebase fails to load) -->
+  <script>
+    window.NEXT = 'login.html';          // default: naya ya logout user
+    var left = false;
 
-  <section class="section" style="text-align:center">
-    <h2 class="reveal">Ready? Tell us about your business.</h2>
-    <a class="btn reveal" href="business.html">Start your project</a>
-  </section>
+    function go() {
+      if (left) return;
+      left = true;
+      document.body.classList.add('leaving');
+      setTimeout(function () { location.replace(window.NEXT); }, 600);
+    }
 
-  <footer class="footer">
-    <p>&copy; 2026 WebMaker</p>
-    <p><a class="ph" href="#"></a> &middot; <a class="em" href="#"></a></p>
-  </footer>
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(go, reduce ? 1200 : 4600);
+    document.getElementById('skip').addEventListener('click', go);
+  </script>
 
-  <script type="module" src="pages.js"></script>
+  <!-- 2. Check if the visitor is already signed in -->
+  <script type="module">
+    import { auth, onAuthStateChanged } from "./firebase.js";
+    onAuthStateChanged(auth, function (user) {
+      window.NEXT = user ? 'home.html' : 'login.html';   // login hai to seedha home
+    });
+  </script>
 </body>
 </html>

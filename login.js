@@ -9,7 +9,7 @@ const pwInput = document.getElementById('password');
 const pwHint = document.getElementById('pw-hint');
 const say = (m, t) => { statusEl.textContent = m; statusEl.className = t || ''; };
 
-onAuthStateChanged(auth, (user) => { if (user) location.href = 'index.html'; });
+onAuthStateChanged(auth, (user) => { if (user) location.href = 'home.html'; });
 
 function friendly(err) {
   const c = (err && err.code) || '';
