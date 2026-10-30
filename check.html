@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Site check</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 24px; max-width: 760px; margin: 0 auto; }
+    li { margin: 8px 0; }
+    .ok { color: #1b6b3a; }
+    .bad { color: #b3261e; font-weight: 700; }
+    .warn { color: #a86a00; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Site check</h1>
+  <p>Address: <b id="addr"></b></p>
+  <ul id="out"></ul>
+
+  <script type="module">
+    const out = document.getElementById('out');
+    document.getElementById('addr').textContent = location.host;
+    const add = (cls, msg) => { const li = document.createElement('li'); li.className = cls; li.textContent = msg; out.appendChild(li); };
+
+    if (location.hostname === '127.0.0.1') add('bad', 'Address is 127.0.0.1. Open localhost:5500 instead (Google login needs localhost).');
+
+    // 1. Do all files exist?
+    const files = ['index.html','intro.html','login.html','login.js','profile.html','profile.js',
+                   'business.html','thanks.html','pages.js','firebase.js','config.js','style.css'];
+    const texts = {};
+    for (const f of files) {
+      try {
+        const r = await fetch(f, { cache: 'no-store' });
+        if (r.ok) { texts[f] = await r.text(); add('ok', 'OK: ' + f); }
+        else add('bad', 'MISSING: ' + f + ' (error ' + r.status + ')');
+      } catch (e) { add('bad', 'CANNOT LOAD: ' + f); }
+    }
+
+    // 2. Is style.css the new version?
+    if (texts['style.css'] && !texts['style.css'].includes('.q-hero')) add('bad', 'style.css is the OLD version. Paste the full style.css again.');
+    // 3. Does index.html use pages.js?
+    if (texts['index.html'] && !texts['index.html'].includes('pages.js')) add('bad', 'index.html is the OLD version. It must load pages.js.');
+
+    // 4. Do the modules load without error?
+    try {
+      const m = await import('./config.js');
+      add('ok', 'config.js loads');
+      if (String(m.CONFIG.web3formsKey).startsWith('PASTE')) add('warn', 'config.js: Web3Forms key not added yet (emails will be skipped).');
+      if (String(m.CONFIG.phoneShow).includes('00000')) add('warn', 'config.js: phone number is still the placeholder.');
+    } catch (e) { add('bad', 'config.js has an error: ' + e.message); }
+
+    try {
+      const fb = await import('./firebase.js');
+      add('ok', 'firebase.js loads');
+      fb.onAuthStateChanged(fb.auth, async (u) => {
+        if (!u) { add('warn', 'Not signed in. Sign in from login.html first, then open this page again.'); return; }
+        add('ok', 'Signed in as ' + u.email);
+        try {
+          const s = await fb.getDoc(fb.doc(fb.db, 'users', u.uid));
+          add(s.exists() ? 'ok' : 'bad', s.exists() ? 'Profile found in database' : 'No profile saved yet. Open profile.html and fill it.');
+        } catch (e) { add('bad', 'Database error: ' + e.message + ' (check Firestore rules)'); }
+      });
+    } catch (e) { add('bad', 'firebase.js has an error: ' + e.message); }
+  </script>
+</body>
+</html>
